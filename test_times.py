@@ -1,4 +1,5 @@
 from times import compute_overlap_time, time_range
+import pytest
 
 
 def test_given_input():
@@ -41,3 +42,10 @@ def test_touching_intervals():
     range2 = time_range("2026-11-02 10:00:00", "2026-11-02 11:00:00")
 
     assert compute_overlap_time(range1, range2) == []
+    
+def test_backwards_time_range():
+    with pytest.raises(ValueError):
+        time_range(
+            "2026-11-02 12:00:00",
+            "2026-11-02 09:00:00",
+        )
